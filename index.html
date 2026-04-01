@@ -2,193 +2,541 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Anaya Infotech – Best IT Training Institute</title>
-
-  <!-- Google Fonts: Syne (headings) + DM Sans (body) -->
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anaya Infotech - Best IT Training Institute</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
-    /* ── CSS Variables (colors, radius) ── */
     :root {
-      --blue: #1a3fcc;  --cyan: #00d4ff;  --orange: #ff6b00;
-      --bg: #04091a;    --bg2: #080f25;   --bg3: #0d1835;
-      --text: #e8eeff;  --muted: #7a8db3;
-      --card-bg: rgba(255,255,255,0.04);
-      --card-border: rgba(100,130,255,0.15);
+      --blue: #1a3fcc;
+      --cyan: #00d4ff;
+      --orange: #ff6b00;
+      --bg: #04091a;
+      --bg2: #080f25;
+      --bg3: #0d1835;
+      --text: #e8eeff;
+      --muted: #95a7cc;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(100, 130, 255, 0.2);
       --radius: 16px;
     }
-
-    /* ── Sections: Navbar, Hero, Courses, Why, Certs,
-           Testimonials, Placement, Contact, Footer ── */
-    /* ── Animations: fadeUp, floatOrb, pulse, spinSlow ── */
-    /* ── Responsive breakpoints: 900px, 600px ── */
-    /* ── Scroll reveal: .reveal → .visible ── */
-
-    body{
-      margin:0;
-      font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(0,212,255,0.14), transparent 60%),
-                  radial-gradient(900px 650px at 90% 0%, rgba(26,63,204,0.20), transparent 55%),
-                  linear-gradient(180deg, var(--bg), var(--bg2));
-      color:var(--text);
-    }
-
-    #contact{
-      padding: 56px 18px;
-      display: grid;
-      place-items: center;
-    }
-    #training{
-      padding: 56px 18px 10px;
-      display: grid;
-      place-items: center;
-    }
-    #training > *{
-      max-width: 980px;
-      width: 100%;
-    }
-    #training h2{
-      margin: 0 0 14px;
-      font-family:"Syne",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      font-size: clamp(26px, 4vw, 40px);
-      letter-spacing: 0.2px;
-    }
-    #training .training-card{
-      margin-top: 10px;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 22px 18px;
-      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    #training .training-grid{
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    #training .training-item{
-      border-radius: calc(var(--radius) - 6px);
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(8,15,37,0.55);
-      padding: 14px 14px;
-      font-weight: 600;
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", Arial, sans-serif;
       color: var(--text);
+      background:
+        radial-gradient(900px 600px at 10% -15%, rgba(0, 212, 255, 0.2), transparent 60%),
+        radial-gradient(900px 600px at 95% 0%, rgba(26, 63, 204, 0.25), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
     }
-    #contact > *{
-      max-width: 980px;
-      width: 100%;
-    }
-    #contact h2{
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92%); margin: 0 auto; }
+    .section { padding: 72px 0; }
+    .section-title {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(30px, 5vw, 44px);
       margin: 0 0 14px;
-      font-family:"Syne",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      font-size: clamp(26px, 4vw, 40px);
-      letter-spacing: 0.2px;
     }
-    #contact .contact-card{
-      margin-top: 10px;
+    .section-subtitle {
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 0 28px;
+    }
+    .reveal { opacity: 0; transform: translateY(22px); transition: all 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(4, 9, 26, 0.72);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .nav-wrap {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      font-family: "Syne", sans-serif;
+      font-size: 25px;
+      font-weight: 800;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand span { color: var(--cyan); }
+    .logo-mark{
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      display: inline-block;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35));
+    }
+    .nav-links { display: flex; align-items: center; gap: 18px; }
+    .nav-links a { color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-primary {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 18px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .menu-btn {
+      display: none;
+      font-size: 23px;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .mobile-menu {
+      display: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 14px 0;
+    }
+    .mobile-menu a {
+      display: block;
+      color: var(--muted);
+      padding: 8px 0;
+      font-weight: 500;
+    }
+
+    .hero {
+      padding: 74px 0 54px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .hero h1 {
+      margin: 0;
+      font-family: "Syne", sans-serif;
+      font-size: clamp(34px, 6vw, 60px);
+      line-height: 1.08;
+    }
+    .hero h1 span { color: var(--cyan); }
+    .hero p {
+      margin: 18px 0 26px;
+      color: var(--muted);
+      font-size: clamp(15px, 2vw, 19px);
+      max-width: 640px;
+    }
+    .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-ghost {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      padding: 10px 18px;
+      color: var(--text);
+      font-weight: 700;
+    }
+    .stats {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 22px 18px;
-      box-shadow: 0 16px 50px rgba(0,0,0,0.35);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    #contact .contact-grid{
+      padding: 18px;
       display: grid;
-      gap: 12px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      backdrop-filter: blur(8px);
+    }
+    .stat { text-align: center; }
+    .stat strong {
+      display: block;
+      font-size: clamp(24px, 4vw, 34px);
+      font-family: "Syne", sans-serif;
+    }
+    .stat span { color: var(--muted); font-size: 14px; }
+
+    .grid-3 {
+      display: grid;
+      gap: 14px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-    #contact .contact-item{
-      border-radius: calc(var(--radius) - 6px);
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(8,15,37,0.55);
-      padding: 14px 14px;
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px;
+      backdrop-filter: blur(10px);
     }
-    #contact .contact-item .label{
+    .card h3 { margin: 0 0 6px; font-size: 19px; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; }
+    .chip {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #02121f;
+      background: linear-gradient(135deg, var(--cyan), #8fe9ff);
+      border-radius: 999px;
+      padding: 5px 10px;
+      margin-bottom: 10px;
+    }
+
+    .why-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+    }
+    .list { margin: 0; padding-left: 18px; color: var(--muted); }
+    .list li { margin-bottom: 9px; }
+
+    .company-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .company {
+      text-align: center;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      color: #c8d8ff;
+      background: rgba(255,255,255,0.02);
+      font-weight: 700;
+    }
+
+    .contact-wrap {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+    }
+    .contact-item { margin-bottom: 12px; }
+    .contact-item label {
       display: block;
       font-size: 12px;
       color: var(--muted);
-      letter-spacing: 0.25px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       text-transform: uppercase;
     }
-    #contact .contact-item .value{
-      font-weight: 600;
+    .contact-item span, .contact-item a { font-weight: 700; }
+    form { display: grid; gap: 10px; }
+    input, textarea {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(6, 12, 28, 0.8);
       color: var(--text);
-      word-break: break-word;
+      padding: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
     }
-    #contact a{
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px dashed rgba(0,212,255,0.55);
+    textarea { min-height: 110px; resize: vertical; }
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 24px 0 38px;
+      color: var(--muted);
     }
-    #contact a:hover{
-      border-bottom-color: rgba(255,107,0,0.65);
+    .whatsapp-float{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 40;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(12, 22, 44, 0.88);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+      color: var(--text);
+      font-weight: 800;
     }
-    @media (max-width: 900px){
-      #training .training-grid{ grid-template-columns: 1fr; }
-      #contact .contact-grid{ grid-template-columns: 1fr; }
+    .whatsapp-float .wa-icon{
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #25D366, #1fc95a);
+      color: #05210f;
+      font-size: 14px;
+      font-weight: 900;
+    }
+    .whatsapp-float:hover{
+      transform: translateY(-2px);
+      transition: transform 0.18s ease;
+      border-color: rgba(37, 211, 102, 0.45);
+    }
+    @media (max-width: 760px){
+      .whatsapp-float .wa-text{ display: none; }
+      .whatsapp-float{ padding: 12px; }
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    .footer-title { color: var(--text); font-weight: 700; margin-bottom: 10px; }
+    .small { font-size: 14px; }
+
+    @media (max-width: 1000px) {
+      .hero-grid, .contact-wrap, .why-grid, .footer-grid { grid-template-columns: 1fr; }
+      .company-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .menu-btn { display: inline-block; }
+      .mobile-menu.show { display: block; }
+      .grid-3, .stats { grid-template-columns: 1fr; }
+      .company-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
-
 <body>
-  <!-- NAVBAR (fixed, blur backdrop, mobile hamburger) -->
-  <!-- MOBILE NAV DROPDOWN -->
-  <!-- HERO (orbs, grid bg, stats bar) -->
-  <!-- COURSES GRID (9 course cards) -->
-  <!-- WHY Anaya Infotech (rotating circle + feature list) -->
-  <!-- CERTIFICATIONS (10 cert cards) -->
-  <!-- TESTIMONIALS (6 student reviews) -->
-  <!-- PLACEMENT (companies row) -->
-  <!-- CONTACT (info + form) -->
-  <!-- FOOTER (4-column grid) -->
+  <nav class="navbar">
+    <div class="container nav-wrap">
+      <a href="#home" class="brand" aria-label="Anaya Infotech Home">
+        <svg class="logo-mark" viewBox="0 0 64 64" role="img" aria-label="Anaya Infotech logo" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1a3fcc"/>
+              <stop offset="1" stop-color="#00d4ff"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ff6b00"/>
+              <stop offset="1" stop-color="#00d4ff"/>
+            </linearGradient>
+          </defs>
+          <rect x="6" y="6" width="52" height="52" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.14)"/>
+          <path d="M18 44 L32 18 L46 44" fill="none" stroke="url(#g1)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M24 36 H40" fill="none" stroke="url(#g2)" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span>Infotech</span>
+      </a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#training">Training</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#placements">Placements</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn-primary">Enroll Now</a>
+      </div>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu">
+      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#training" onclick="closeMenu()">Training</a>
+      <a href="#why-us" onclick="closeMenu()">Why Us</a>
+      <a href="#placements" onclick="closeMenu()">Placements</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </div>
+  </nav>
 
-  <section id="training">
-    <h2>Training Content</h2>
-    <div class="training-card">
-      <div class="training-grid">
-        <div class="training-item">RHCSA</div>
-        <div class="training-item">RHCE</div>
-        <div class="training-item">AWS CLOUD</div>
-        <div class="training-item">AZURE CLOUD</div>
-        <div class="training-item">GOOGLE CLOUD</div>
-        <div class="training-item">Kubernetes/Docker</div>
-        <div class="training-item">DEVOPS</div>
+  <header id="home" class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <h1>Build Your IT Career with <span>Anaya Infotech</span></h1>
+        <p>
+          Job-ready practical training, real lab environment, interview preparation, and placement support.
+          Start your journey in Linux, Cloud, Containers, and DevOps with expert mentors.
+        </p>
+        <div class="hero-cta">
+          <a class="btn-primary" href="#training">Explore Courses</a>
+          <a class="btn-ghost" href="#contact">Book Demo Class</a>
+        </div>
+      </div>
+      <div class="stats reveal">
+        <div class="stat"><strong>3000+</strong><span>Students Trained</span></div>
+        <div class="stat"><strong>500+</strong><span>Placements</span></div>
+        <div class="stat"><strong>4.8/5</strong><span>Student Rating</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="training" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Training Programs</h2>
+      <p class="section-subtitle reveal">
+        Industry-focused modules with assignments, case studies, projects, and mock interviews.
+      </p>
+      <div class="grid-3">
+        <article class="card reveal"><span class="chip">Linux</span><h3>RHCSA</h3><p>Linux administration fundamentals, users, permissions, storage, networking and troubleshooting.</p></article>
+        <article class="card reveal"><span class="chip">Linux Pro</span><h3>RHCE</h3><p>Advanced Linux automation, security hardening, services, shell scripting and enterprise tasks.</p></article>
+        <article class="card reveal"><span class="chip">Cloud</span><h3>AWS Cloud</h3><p>Compute, storage, IAM, networking, monitoring and architecture best practices on AWS.</p></article>
+        <article class="card reveal"><span class="chip">Cloud</span><h3>Azure Cloud</h3><p>Azure services, VNets, identity, virtual machines, governance and deployment practices.</p></article>
+        <article class="card reveal"><span class="chip">Cloud</span><h3>Google Cloud</h3><p>GCP core services, IAM, networking, Kubernetes engine and production workflows.</p></article>
+        <article class="card reveal"><span class="chip">Containers</span><h3>Kubernetes / Docker</h3><p>Containerization lifecycle, Docker images, Kubernetes objects, scaling and operations.</p></article>
+        <article class="card reveal"><span class="chip">Career Track</span><h3>DevOps</h3><p>Git, CI/CD, IaC, monitoring, release automation and full DevOps project implementation.</p></article>
       </div>
     </div>
   </section>
 
-  <section id="contact">
-    <h2>Contact</h2>
+  <section id="why-us" class="section">
+    <div class="container why-grid">
+      <div class="card reveal">
+        <h2 class="section-title" style="font-size: clamp(28px, 4vw, 38px); margin-bottom: 8px;">Why Anaya Infotech</h2>
+        <p class="section-subtitle" style="margin: 0;">A practical institute setup designed for real industry outcomes.</p>
+      </div>
+      <div class="card reveal">
+        <ul class="list">
+          <li>100% practical classes with live labs</li>
+          <li>Resume building and interview question bank</li>
+          <li>Dedicated weekend and weekday batches</li>
+          <li>Placement support and recruiter connects</li>
+          <li>Recorded sessions and revision support</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <div class="contact-card">
-      <div class="contact-grid">
-        <div class="contact-item">
-          <span class="label">Phone</span>
-          <span class="value"><a href="tel:8871004497">8871004497</a></span>
+  <section id="certifications" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Certification & Career Support</h2>
+      <div class="grid-3">
+        <article class="card reveal"><h3>Guided Certification Path</h3><p>Step-by-step roadmap for RHCSA, RHCE and cloud certifications.</p></article>
+        <article class="card reveal"><h3>Mock Interviews</h3><p>Technical and HR mock rounds with personalized feedback.</p></article>
+        <article class="card reveal"><h3>Live Projects</h3><p>Hands-on capstone projects on cloud and DevOps toolchain.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Student Reviews</h2>
+      <div class="grid-3">
+        <article class="card reveal"><h3>Rahul Verma</h3><p>"Best Linux + DevOps practical classes in Bhopal. Good faculty and support."</p></article>
+        <article class="card reveal"><h3>Neha Sharma</h3><p>"Cloud modules were clear and project-based. Helped me crack interviews."</p></article>
+        <article class="card reveal"><h3>Arjun Patel</h3><p>"Great place for RHCSA and RHCE prep. Lab practice was the biggest plus."</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="placements" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Placement Partners</h2>
+      <p class="section-subtitle reveal">Our students are working across startups, product companies, and IT services firms.</p>
+      <div class="company-grid reveal">
+        <div class="company">TCS</div>
+        <div class="company">Infosys</div>
+        <div class="company">Wipro</div>
+        <div class="company">HCL</div>
+        <div class="company">Tech Mahindra</div>
+        <div class="company">Accenture</div>
+        <div class="company">Capgemini</div>
+        <div class="company">Cognizant</div>
+        <div class="company">LTIMindtree</div>
+        <div class="company">IBM</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">Contact Us</h2>
+      <div class="contact-wrap">
+        <div class="card reveal">
+          <div class="contact-item"><label>Phone</label><a href="tel:8871004497">8871004497</a></div>
+          <div class="contact-item"><label>Email</label><a href="mailto:devopsavinashpandey@gmail.com">devopsavinashpandey@gmail.com</a></div>
+          <div class="contact-item"><label>Address</label><span>Nehru Nagar, Bhopal 462003</span></div>
         </div>
-        <div class="contact-item">
-          <span class="label">Email</span>
-          <span class="value"><a href="mailto:devopsavinashpandey@gmail.com">devopsavinashpandey@gmail.com</a></span>
-        </div>
-        <div class="contact-item">
-          <span class="label">Address</span>
-          <span class="value">Nehru Nagar, Bhopal 462003</span>
+        <div class="card reveal">
+          <form onsubmit="handleSubmit(event)">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="tel" name="phone" placeholder="Phone Number" required />
+            <input type="email" name="email" placeholder="Email Address" required />
+            <textarea name="message" placeholder="Tell us your preferred course"></textarea>
+            <button class="btn-primary" type="submit">Send Inquiry</button>
+          </form>
         </div>
       </div>
     </div>
   </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="brand" aria-label="Anaya Infotech">
+          <svg class="logo-mark" viewBox="0 0 64 64" role="img" aria-label="Anaya Infotech logo" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="fg1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#1a3fcc"/>
+                <stop offset="1" stop-color="#00d4ff"/>
+              </linearGradient>
+              <linearGradient id="fg2" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ff6b00"/>
+                <stop offset="1" stop-color="#00d4ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="6" y="6" width="52" height="52" rx="16" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.14)"/>
+            <path d="M18 44 L32 18 L46 44" fill="none" stroke="url(#fg1)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M24 36 H40" fill="none" stroke="url(#fg2)" stroke-width="5" stroke-linecap="round"/>
+          </svg>
+          Anaya <span>Infotech</span>
+        </div>
+        <p class="small">Professional IT training institute for Linux, Cloud, Containers, and DevOps careers.</p>
+      </div>
+      <div>
+        <div class="footer-title">Courses</div>
+        <div class="small">RHCSA</div>
+        <div class="small">RHCE</div>
+        <div class="small">Cloud</div>
+      </div>
+      <div>
+        <div class="footer-title">Career</div>
+        <div class="small">Mock Interviews</div>
+        <div class="small">Resume Support</div>
+        <div class="small">Placements</div>
+      </div>
+      <div>
+        <div class="footer-title">Contact</div>
+        <div class="small">8871004497</div>
+        <div class="small">devopsavinashpandey@gmail.com</div>
+        <div class="small">Bhopal, MP</div>
+      </div>
+    </div>
+  </footer>
+
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/918871004497?text=Hi%20Anaya%20Infotech%2C%20I%20want%20to%20enquire%20about%20training."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Chat on WhatsApp"
+    title="Chat on WhatsApp"
+  >
+    <span class="wa-icon">WA</span>
+    <span class="wa-text">WhatsApp</span>
+  </a>
 
   <script>
-    // toggleMenu() / closeMenu() — mobile nav
-    // IntersectionObserver — scroll reveal
-    // scroll listener — navbar bg on scroll
-    // handleSubmit() — form alert
+    function toggleMenu() {
+      document.getElementById("mobileMenu").classList.toggle("show");
+    }
+    function closeMenu() {
+      document.getElementById("mobileMenu").classList.remove("show");
+    }
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert("Thank you! Your inquiry has been submitted. Our team will contact you soon.");
+      event.target.reset();
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
   </script>
 </body>
 </html>
